@@ -13,12 +13,16 @@ class CreateTwEntriesTable extends Migration {
     public function up() {
         Schema::create('twitter_entries', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->bigInteger('tw_id');
-            $table->string('content', 200);
+            $table->integer('tw_id');
+            $table->string('tw_text', 200);
+            $table->string('tw_name', 255);
+            $table->string('tw_screen_name', 255);
+            $table->bigInteger('tw_created_at', 255);
+            $table->string('tw_profile_image_url', 255)->nullable()->default(null);;
             $table->integer('user_id');
-            $table->bigInteger('is_hidden');
-            $table->bigInteger('hidden_at');
-            $table->bigInteger('created_at');
+            $table->boolean('is_hidden')->default(false);
+            $table->bigInteger('time_hidden')->nullable()->default(null);
+            $table->bigInteger('time_created');
         });
     }
 

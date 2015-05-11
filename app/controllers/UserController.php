@@ -107,7 +107,7 @@ class UserController extends \BaseController {
         $user = User::where("username","=",$username)->first();
         if( !$user instanceof User){
             if (Request::ajax()) {
-                return Response::make('User profile to try access, dont existe', 401);
+                return Response::make(trans("app.user_no_exist"), 401);
             }
             return Redirect::to('/')->with('error', trans("app.user_no_exist"));
         }
@@ -120,6 +120,144 @@ class UserController extends \BaseController {
         }
         
         return View::make('user.profile')->with("user",$user)->with("entries",$entries);
+    }
+    /**
+     * 
+     */
+    public function getTwitterTimeline($username){
+        $perpage = 5;
+        //Define response array
+        $response = array(
+            "success" => false,
+            "message" => "",
+            "data"=>array()
+        );
+        
+        $user = User::where("username","=",$username)->first();
+        
+        //Checking if user exist in database
+        if( !$user instanceof User){
+            $response["message"] =trans("app.user_no_exist");
+            return Response::json($response);
+        }
+
+        //Is no owner, can't view hidden tweets
+
+        if (!Auth::guest() && Auth::user()->id != $user->id) {
+            $tweets = $user->get_tweets($perpage, true)->toArray();
+        } else {
+            $tweets = $user->get_tweets($perpage)->toArray();
+        }
+
+        $response["message"] = trans("app.loaded_tweets",array("count"=>count($tweets["data"] )));
+        $response["success"] = true;
+        $response["data"] = $tweets;
+        return Response::json($response);
+    }
+    
+    public function toggle_tweet(){
+        //Get id from view
+        $twid = Input::get("twid");
+        
+        //Define response array
+        $response = array(
+            "success" => false,
+            "message" => "",
+            "data"=>array()
+        );
+        
+        $tweet = Tweet::find($twid);
+        
+        //Checking if tweet exist in database
+        if( !$tweet instanceof Tweet){
+            $response["message"] =trans("app.tweet_no_exist");
+            return Response::json($response);
+        }
+        
+        if( Auth::user()->id != $tweet->user_id ){
+            $response["message"] =  trans("app.no_owner_tweet");
+            return Response::json($response);
+        }
+                
+        //toggle flag hidden
+        if( $tweet->is_hidden ){
+            $tweet->is_hidden = 0;
+        }else{
+            $tweet->is_hidden = 1;
+        }
+        $tweet->save();
+        
+        //Set and return object
+        $response["success"] = true;
+        $response["data"] = $tweet->toArray();
+        return Response::json($response);
+    }
+    
+    
+    /**
+     * 
+     */
+    public function syncTwitterTimeLine($username,$count){
+        //Define response array
+        $response = array(
+            "success" => false,
+            "message" => "",
+            "data"=>array()
+        );
+        
+        $user = User::where("username","=",$username)->first();
+        //Checking if user exist in database
+        if( !$user instanceof User){
+            $response["message"] =  trans("app.user_no_exist");
+            return Response::json($response);
+        }
+        
+        //Api rest user_timeline parameters
+        $parameters = array(
+            'screen_name' => substr($user->twitter_account, 1),
+            'count' => $count
+        );
+        
+        //Get last tweet from database for syncronization
+        $last_tweet = $user->get_last_tweet();
+        if( $last_tweet ){
+            //Append parameter since
+            $parameters['since_id'] = $last_tweet->tw_id;
+        }
+        
+        
+        //Get form Twitter API, the last tweet since local tweet saved.
+        try {
+            $tweets = Twitter::getUserTimeline($parameters);
+        } catch (Exception $e) {
+            $response["message"] = $e->getMessage();
+            return Response::json($response);
+        }
+
+        //If have new tweets, add in database
+        if( count($tweets )){
+            foreach($tweets as $tweet){
+                $tweet_entry = new Tweet;
+                $tweet_entry->tw_id = $tweet->id_str;
+                $tweet_entry->tw_text = $tweet->text;
+                $tweet_entry->tw_name = $tweet->user->name;
+                $tweet_entry->tw_screen_name = $tweet->user->screen_name;
+                $tweet_entry->tw_profile_image_url = $tweet->user->profile_image_url;
+                $tweet_entry->tw_created_at = strtotime($tweet->created_at);
+                $tweet_entry->user_id = $user->id;
+                $tweet_entry->is_hidden = 0;
+                $tweet_entry->time_created = \time();
+                $tweet_entry->save();
+                
+                $response["data"][] = $tweet_entry->toArray();
+            }
+        }
+        
+        //Return JSON response with new new tweet, for display
+        $response["message"] = trans("app.loaded_new_tweets",array("count"=>count($tweets )));
+        $response["total"] = count($tweets);
+        $response["success"] = true;
+        return Response::json($response);
     }
 
 }

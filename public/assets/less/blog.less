@@ -8,9 +8,76 @@ and open the template in the editor.
     Author     : erick
 */
 
-@max-width-container: 960px;
+@import "variables";
+@import "layout";
 
-#page-wrap{
-    max-width: @max-width-container;
-    margin:auto;
+/*
+    General
+*/
+body{
+    font-family: @font-family-sans-serif;
+}
+
+a{
+    color: @link-color;
+    font-weight: 600;
+    &:hover{
+        color: @link-color-hover;
+        text-decoration: @link-hover-decoration;
+    }
+}
+
+h1,h2,h3,h4,h5,h6{
+    color: @headings-color;
+    font-weight: @headings-font-weight;
+    line-height: @headings-line-height;
+    color:@headings-color;
+    > a{
+        color:@headings-color;
+    }
+}
+
+/* Blog */
+
+.blob_entry{
+    .title{
+
+    }
+    .date{
+        display: inline-block;
+        font-style: italic;
+    }
+    .author{
+        display: inline-block;
+        margin-left: 40px;
+    }
+    .content{
+        margin-bottom: 10px;
+    }
+}
+
+.options{
+    margin-top: 5px;
+}
+
+#twitter_timeline{
+
+    .hidden_tweet{
+        backgroup: #EAEAEA;
+        color: #ADABAB;
+        a {
+            color: #747474;
+        }
+    }
+
+    .screen_name{
+        display: inline-block;
+        margin-left: 8px;
+    }
+
+    .date{
+        display: inline-block;
+        font-style: italic;
+        font-size: 10px;
+    }
 }

@@ -5,13 +5,20 @@
 @endsection
 
 @section("script")
-<script>
-    //Javascript var for URL generate by laravel. 
-    //This variables used in internal ajax function
-    var route = {
-        get_entries: '{{ action("UserController@profile",array("username"=>$user->username)) }}',
-    }
-</script>
+    <script>
+        var user = {{json_encode($user)}};
+        //Javascript var for URL generate by laravel. 
+        //This variables used in internal ajax function
+        var route = {
+            get_entries: '{{ action("UserController@profile",array("username"=>$user->username)) }}',
+            get_tweet: '{{ action("UserController@getTwitterTimeline",array("username"=>$user->username)) }}',
+            sync_tweets: '{{ action("UserController@syncTwitterTimeLine",array("username"=>$user->username,"count"=>10)) }}',
+            toggle_tweet: '{{ action("UserController@toggle_tweet",array("username"=>$user->username)) }}',
+        };
+    </script>
+    <!--Add script module for entries and user-->
+    <script src="{{ asset('assets/js/modules/entry.js') }}"></script>
+    <script src="{{ asset('assets/js/modules/user.js') }}"></script>
 @stop
 
 @section("header")
@@ -48,18 +55,12 @@
         </div>
         <!--Side bar -->
         <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">@lang('app.user_info')</div>
-                <ul class="list-group">
-                    
-                </ul>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">@lang('app.tweets', array('twitter_account'=>$user->twitter_account) )</div>
-                <ul class="list-group">
-
-                </ul>
+            <div class="panel panel-primary">
+                <div class="panel-heading">@lang('app.tweets', array('twitter_account'=>$user->twitter_account) ) <a href="javascript:void(0);" id="sync_tweets" class="pull-right"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> @lang('app.refresh')</a></div>
+                <div class="panel-body">
+                    <div id="twitter_timeline">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -69,4 +70,5 @@
 <!--Add function in document reader-->
 @section("js_on_ready")
 APP.entry.register_local_handler();
+APP.user.init();
 @stop

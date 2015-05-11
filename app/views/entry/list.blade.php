@@ -15,7 +15,7 @@
                     @endforeach
                 </p>
                 <div class="options pull-right">
-                    {{ link_to_action('EntryController@read', trans("app.view_entry"), array("id"=>$entry->id),array("class"=>"btn btn-info load_modal") )  }}
+                    {{ link_to_action('EntryController@read', trans("app.quick_view_entry"), array("id"=>$entry->id),array("class"=>"btn btn-info load_modal") )  }}
                     @if ($entry->is_owner() )
                     {{ link_to_action('EntryController@update', trans("app.edit_entry"), array("id"=>$entry->id),array("class"=>"btn btn-primary ") )  }}
                     @endif

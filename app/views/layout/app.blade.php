@@ -86,7 +86,22 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
-
+        <!--MomentJs for Date javascript Libs-->
+        <script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
+        <!--Linkify a jQuery plugin javascript Libs-->
+        <script src="{{ asset('assets/js/jquery.linkify.min.js') }}"></script>
+        <!--bootstrap-notify plugin javascript Libs-->
+        <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
+        
+        <script>
+            //Save logged user in javascript var
+            @if (Auth::guest())
+                var auth_user = {};
+            @else
+                var auth_user = {{ json_encode(Auth::user()->toArray()) }};
+            @endif
+        </script>
+        
         <script src="{{ asset('assets/js/blog.js') }}"></script>
         <!--Custom scripts section load-->
         @yield('script')

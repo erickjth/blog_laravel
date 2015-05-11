@@ -29,25 +29,26 @@ Register user
 
     <div class="row">
         <div class="col-md-12 ">
-
-            <h1 class="title"></h1>
-            <p class="date"><span class="glyphicon glyphicon-time"></span> {{ date('F j, Y, g:i a',$entry->time_created)  }}</p>
-            <p class="author"><span class="glyphicon glyphicon-user"></span> @lang('app.by'): {{ link_to_action('UserController@profile',$entry->user->username , array("username"=>$entry->user->username) ) ; }}</p>
-            <div class="content">
-                {{ $entry->content }}
-            </div>
-            <p>@lang('app.tags'): 
-                @foreach( $entry->get_tags_array() as $tag  )
-                <span class="label label-primary">{{ $tag }}</span>
-                @endforeach
-            </p>
-            <div class="options pull-right">
-                @if ($entry->is_owner() )
-                {{ link_to_action('EntryController@update', trans("app.edit_entry"), array("id"=>$entry->id),array("class"=>"btn btn-primary ") ) ; }}
-                @endif
+            <div class="blob_entry">
+                <h1 class="title"></h1>
+                <p class="date"><span class="glyphicon glyphicon-time"></span> {{ date('F j, Y, g:i a',$entry->time_created)  }}</p>
+                <p class="author"><span class="glyphicon glyphicon-user"></span> @lang('app.by'): {{ link_to_action('UserController@profile',$entry->user->username , array("username"=>$entry->user->username) ) }}</p>
+                <div class="content">
+                    {{ $entry->content }}
+                </div>
+                <p>@lang('app.tags'): 
+                    @foreach( $entry->get_tags_array() as $tag  )
+                    <span class="label label-primary">{{ $tag }}</span>
+                    @endforeach
+                </p>
+                <div class="options pull-right">
+                    {{ link_to_action('UserController@profile',trans('app.go_back') , array("username"=>$entry->user->username), array("class"=>"btn btn-primary") ) }}
+                    @if ($entry->is_owner() )
+                    {{ link_to_action('EntryController@update', trans("app.edit_entry"), array("id"=>$entry->id),array("class"=>"btn btn-primary ") ) ; }}
+                    @endif
+                </div>
             </div>
         </div>
-
     </div>
 </div>
 

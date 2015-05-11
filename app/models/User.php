@@ -56,6 +56,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     }
     
     /**
+     * Define relationship for Twitter Entries
+     **/
+    public function tweets()
+    {
+        return $this->hasMany('Tweet');
+    }
+    
+    /**
      * Get all users with relationship
      * Improved query performance of the relationship. 
      * 
@@ -66,6 +74,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return User::with('entries')->get();
     }
     
+    public function get_last_tweet() {
+       return $this->from("twitter_entries")->where("user_id","=",$this->id)->orderBy('tw_id','desc')->first();
+    }
+    
+    public function get_tweets($page, $hidden = null) {
+        $query = $this->from("twitter_entries")
+                ->where("user_id", "=", $this->id);
+        if ($hidden) {
+            $query->where("is_hidden", "=", 0);
+        }
+        $query->orderBy('tw_id', 'desc');
+
+        return $query->paginate($page);
+    }
     
     /**
      * Create User Object 

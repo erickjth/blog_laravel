@@ -27,7 +27,7 @@ Register user
             </div>
             <div class="form-group">
                 {{Form::label('content',trans('app.content'))}}
-                {{Form::textarea('content', null,array('class' => 'form-control'))}}
+                {{Form::textarea('content', null,array('class' => 'form-control editor'))}}
             </div>
             <div class="form-group">
                 {{Form::label('tags',trans('app.tags'))}}

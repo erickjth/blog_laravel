@@ -5,13 +5,15 @@
 @endsection
 
 @section("script")
-<script>
-    //Javascript var for URL generate by laravel. 
-    //This variables used in internal ajax function
-    var route = {
-        get_entries : '{{ action("HomeController@index") }}',
-    }
-</script>
+    <script>
+        //Javascript var for URL generate by laravel. 
+        //This variables used in internal ajax function
+        var route = {
+            get_entries : '{{ action("HomeController@index") }}',
+        }
+    </script>
+    <!--Add script module for entries-->
+    <script src="{{ asset('assets/js/modules/entry.js') }}"></script>
 @stop
 
 @section("header")
@@ -46,25 +48,16 @@
     </div>
     <!--Side bar -->
     <div class="col-md-4">
-        <div class="panel panel-default">
+        <div class="panel panel-primary">
             <div class="panel-heading">@lang('app.entries_by_user')</div>
-            <ul class="list-group">
+            <div class="list-group">
                 @foreach( $users as $user )
-                <li class="list-group-item">
-                    <a href="{{ action('UserController@profile', array("username"=>$user->username) ) ; }}">
-                        {{ $user->username }}
-                        <span class="badge pull-right">{{ count( $user->entries  ) }}</span>
-                    </a>
-                </li>
+                <a class="list-group-item" href="{{ action('UserController@profile', array("username"=>$user->username) ) ; }}">
+                    {{ $user->username }}
+                    <span class="badge">{{ count( $user->entries  ) }}</span>
+                </a>
                 @endforeach
-            </ul>
-        </div>
-        
-        <div class="panel panel-default">
-            <div class="panel-heading">@lang('app.tags')</div>
-            <ul class="list-group">
-                
-            </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -24,6 +24,9 @@ Route::get('/user/register', array('uses' => 'UserController@create'))->before('
 Route::post('/user/register', array('uses' => 'UserController@create'))->before('guest')->before('csrf');
 
 Route::get('/user/{username}/profile', array('uses' => 'UserController@profile'));
+Route::get('/user/{username}/get_twitter_timeline', array('uses' => 'UserController@getTwitterTimeline'));
+Route::post('/user/{username}/twitter_timeline_sync/{count}', array('uses' => 'UserController@syncTwitterTimeLine'));
+Route::post('/user/{username}/twitter_timeline/toogle', array('uses' => 'UserController@toggle_tweet'));
 
 
 /*
