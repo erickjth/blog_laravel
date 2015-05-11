@@ -1,0 +1,28 @@
+<?php
+
+return array(
+    "by" => "Por",
+    "tags" => "Etiquetas",
+    "empty_list" => "Ningún contenido aún.",
+    "new_entry" => "Nueva entrada",
+    "title" => "Título",
+    "content" => "Contenido",
+    "create_entry"=>"Crear entrada",
+    "create_new_entry"=>"Crear nueva entreda",
+    "hello"=>"Hola",
+    "logout"=>"Salir",
+    "login"=>"Ingresar",
+    "register"=>"Registrar",
+    "signup" => "Registrarse",
+    "signin"=>"Ingresar",
+    "username"=>"Usuario",
+    "email"=>"E-mail",
+    "twitter_account"=>"Usuario Twitter",
+    "password"=>"Contraseña",
+    "repeat_password"=>"Repetir contraseña",
+    "welcome_message"=>"Bienvenido :user! Gracias por registrarte en este sitio.",
+    "error_creating"=>"Error al crear el usuario. Por favor intente nuevamente.",
+    "error_signin"=>"Usuario o contraseña incorrecta.Por favor intente nuevamente.",
+    "user_logged"=>"Ya usted se encuentra autenticado!",
+    "login_require"=>"Debería ingresar al sistema antes de ver la página que desea consultar.",
+);
