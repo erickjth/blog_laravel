@@ -1,4 +1,9 @@
 <?php
+/**
+ * Description of Entry
+ *
+ * @author erick
+ */
 
 use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
