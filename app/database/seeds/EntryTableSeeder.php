@@ -15,6 +15,7 @@ class EntryTableSeeder extends Seeder {
 
     public function run() {
         DB::table('entries')->delete();
+        
         Entry::create(array(
             'title' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor nibh imperdiet tortor dignissim fringilla. Vestibulum congue commodo aliquet. Maecenas blandit sem id tellus sodales hendrerit et sit amet elit. Suspendisse id facilisis diam. Curabitur quis fringilla nulla. Maecenas sit amet nunc consequat, pellentesque magna sit amet, convallis magna. Etiam bibendum, magna sit amet blandit finibus, urna risus lobortis libero, nec pellentesque erat lacus quis arcu. Curabitur ipsum eros, auctor volutpat tellus nec, varius hendrerit massa. In mattis pharetra tortor, vitae rhoncus ipsum malesuada molestie. Nam quis diam felis. Sed vestibulum metus eget leo dignissim, vel tempor felis volutpat. Ut commodo, felis at commodo auctor, quam dolor suscipit neque, et ullamcorper est libero ut risus. Quisque mattis mi et dignissim sagittis. Mauris eu dolor et leo lacinia fringilla sed nec neque.',
@@ -31,6 +32,33 @@ class EntryTableSeeder extends Seeder {
             'time_created' => \time(),
             'time_updated' => \time(),
             'tags'=>"tag1, tag2, tag3"
+        ));
+        
+        Entry::create(array(
+            'title' => 'Morbi lacinia nec massa in suscipit. Suspendisse vulputate elit sed enim venenatis consectetur.',
+            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor nibh imperdiet tortor dignissim fringilla. Vestibulum congue commodo aliquet. Maecenas blandit sem id tellus sodales hendrerit et sit amet elit. Suspendisse id facilisis diam. Curabitur quis fringilla nulla. Maecenas sit amet nunc consequat, pellentesque magna sit amet, convallis magna. Etiam bibendum, magna sit amet blandit finibus, urna risus lobortis libero, nec pellentesque erat lacus quis arcu. Curabitur ipsum eros, auctor volutpat tellus nec, varius hendrerit massa. In mattis pharetra tortor, vitae rhoncus ipsum malesuada molestie. Nam quis diam felis. Sed vestibulum metus eget leo dignissim, vel tempor felis volutpat. Ut commodo, felis at commodo auctor, quam dolor suscipit neque, et ullamcorper est libero ut risus. Quisque mattis mi et dignissim sagittis. Mauris eu dolor et leo lacinia fringilla sed nec neque.',
+            'user_id' => User::where('username', '=', 'user1')->first()->id,
+            'time_created' => \time(),
+            'time_updated' => \time(),
+            'tags'=>"tag1, tag3"
+        ));
+        
+        Entry::create(array(
+            'title' => 'Suspendisse vehicula turpis nunc, eget posuere ante placerat a.',
+            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor nibh imperdiet tortor dignissim fringilla. Vestibulum congue commodo aliquet. Maecenas blandit sem id tellus sodales hendrerit et sit amet elit. Suspendisse id facilisis diam. Curabitur quis fringilla nulla. Maecenas sit amet nunc consequat, pellentesque magna sit amet, convallis magna. Etiam bibendum, magna sit amet blandit finibus, urna risus lobortis libero, nec pellentesque erat lacus quis arcu. Curabitur ipsum eros, auctor volutpat tellus nec, varius hendrerit massa. In mattis pharetra tortor, vitae rhoncus ipsum malesuada molestie. Nam quis diam felis. Sed vestibulum metus eget leo dignissim, vel tempor felis volutpat. Ut commodo, felis at commodo auctor, quam dolor suscipit neque, et ullamcorper est libero ut risus. Quisque mattis mi et dignissim sagittis. Mauris eu dolor et leo lacinia fringilla sed nec neque.',
+            'user_id' => User::where('username', '=', 'user1')->first()->id,
+            'time_created' => \time(),
+            'time_updated' => \time(),
+            'tags'=>"tag1, tag3"
+        ));
+        
+        Entry::create(array(
+            'title' => 'Duis euismod mattis massa. Sed dignissim interdum nunc molestie ultrices.',
+            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse auctor nibh imperdiet tortor dignissim fringilla. Vestibulum congue commodo aliquet. Maecenas blandit sem id tellus sodales hendrerit et sit amet elit. Suspendisse id facilisis diam. Curabitur quis fringilla nulla. Maecenas sit amet nunc consequat, pellentesque magna sit amet, convallis magna. Etiam bibendum, magna sit amet blandit finibus, urna risus lobortis libero, nec pellentesque erat lacus quis arcu. Curabitur ipsum eros, auctor volutpat tellus nec, varius hendrerit massa. In mattis pharetra tortor, vitae rhoncus ipsum malesuada molestie. Nam quis diam felis. Sed vestibulum metus eget leo dignissim, vel tempor felis volutpat. Ut commodo, felis at commodo auctor, quam dolor suscipit neque, et ullamcorper est libero ut risus. Quisque mattis mi et dignissim sagittis. Mauris eu dolor et leo lacinia fringilla sed nec neque.',
+            'user_id' => User::where('username', '=', 'user2')->first()->id,
+            'time_created' => \time(),
+            'time_updated' => \time(),
+            'tags'=>"tag1"
         ));
     }
 

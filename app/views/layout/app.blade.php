@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Blog :: @yield('title')</title>
+        <title>Blog::@yield('title')</title>
 
         
         <!-- Bootstrapt minified CSS -->

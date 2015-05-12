@@ -75,7 +75,7 @@ class EntryController extends \BaseController {
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified entry.
      *
      * @param  int  $id
      * @return Response
@@ -93,7 +93,7 @@ class EntryController extends \BaseController {
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified entry in storage.
      *
      * @param  int  $id
      * @return Response
@@ -182,14 +182,5 @@ class EntryController extends \BaseController {
         return View::make('entry.edit')->with("entry",$entry);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function delete($id) {
-        //
-    }
 
 }

@@ -11,6 +11,7 @@ class HomeController extends BaseController {
         //Get all entries 
         $entries = Entry::get_with_author(3);
         
+        //If page parameter if invalid, response error
         if( Input::get("page") > $entries->getLastPage() ){
             return Response::make("Page no valid!!");
         }

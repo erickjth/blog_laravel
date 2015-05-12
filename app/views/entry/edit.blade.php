@@ -1,7 +1,7 @@
 
 @extends('layout.app')
 @section('title')
-Register user
+@lang('app.edit_entry')
 @endsection
 
 @section("header")

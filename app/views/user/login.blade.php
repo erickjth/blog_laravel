@@ -1,6 +1,7 @@
 @extends('layout.app')
+
 @section('title')
-Login
+@lang('app.signin')
 @endsection
 
 @section("header")

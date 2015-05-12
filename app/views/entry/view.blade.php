@@ -1,7 +1,7 @@
 
 @extends('layout.app')
 @section('title')
-Register user
+{{ $entry->title  }}
 @endsection
 
 @section("header")

@@ -126,7 +126,10 @@ class UserController extends \BaseController {
         return View::make('user.profile')->with("user",$user)->with("entries",$entries);
     }
     /**
+     * Get tweet TimeLine for specific user
      * 
+     * @param string $username
+     * @return Response 
      */
     public function getTwitterTimeline($username){
         $perpage = 5;
@@ -158,6 +161,12 @@ class UserController extends \BaseController {
         return Response::json($response);
     }
     
+    /**
+     * Change state "hide" for specific tweet storaged in database
+     * This action check owner tweet.
+     * 
+     * @return Response 
+     */
     public function toggle_tweet(){
         //Get id from view
         $twid = Input::get("twid");
@@ -198,10 +207,14 @@ class UserController extends \BaseController {
         $response["data"] = $tweet->toArray();
         return Response::json($response);
     }
-    
-    
+
     /**
+     * Syncronice local tweets from Twitter API by user
      * 
+     * @param string $username
+     * @param int $count Tweet number to sync
+     * 
+     * @return Response 
      */
     public function syncTwitterTimeLine($username,$count){
         //Define response array
@@ -258,7 +271,7 @@ class UserController extends \BaseController {
                 $response["data"][$tweet_entry->tw_id] = $tweet_entry->toArray();
             }
         }
-        
+        //Fix order for HTML list in view
         ksort($response["data"]);
         
         //Return JSON response with new new tweet, for display
