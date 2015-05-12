@@ -33,7 +33,7 @@ APP.entry = {
         APP.entry.get_entries(page_hash());
 
         //Get hash in url from pagination link for load ajax page.
-        $(document).on('click', '.pagination a', function(e) {
+        $(document).on('click', '#entry_list .pagination a,#entry_list .pager a', function(e) {
             var page = $(this).attr('href').split('page=')[1];
             //Set location, and force run hashchange handler :)
             location.hash = page;

@@ -35,7 +35,7 @@ class EntryController extends \BaseController {
                 if (Request::ajax()) {
                     //Response json format
                     $response["message"] = $error;
-                    return json_encode($response);
+                    return  Response::json($response);
                 }
 
                 return Redirect::to('/entry/new')->with('error', $error)->withInput(Input::all());
@@ -53,8 +53,8 @@ class EntryController extends \BaseController {
                     $response["message"] = "Entry <em>'" . $entry->title . "'</em> created succesfull!!";
                     $response["success"] = true;
                     $response["entry"] = $entry;
-                    $response["callback"] = "Entry.refresh";
-                    return json_encode($response);
+                    $response["callback"] = "";
+                    return  Response::json($response);
                 }
 
                 //Redirecto to home
@@ -63,7 +63,7 @@ class EntryController extends \BaseController {
                 if (Request::ajax()) {
                     //Response json format
                     $response["message"] = 'Error creating entry. Please try again.';
-                    return json_encode($response);
+                    return  Response::json($response);
                 }
                 //Error to try create User, redirecto to Registration form
                 return Redirect::to('/entry/new')->with('error', 'Error creating entry. Please try again.')->withInput(Input::all());
@@ -111,7 +111,7 @@ class EntryController extends \BaseController {
             if (Request::ajax()) {
                 //Response json format
                 $response["message"] =  trans("app.no_exist_entry");
-                return json_encode($response);
+                return  Response::json($response);
             }
             return Redirect::to('/')->with('error', trans("app.no_exist_entry") );
         }
@@ -123,7 +123,7 @@ class EntryController extends \BaseController {
             if (Request::ajax()) {
                 //Response json format
                 $response["message"] =  trans("app.no_owner_message");
-                return json_encode($response);
+                return  Response::json($response);
             }
             return Redirect::to('/')->with('warning', trans("app.no_owner_message") );
         }
@@ -142,7 +142,7 @@ class EntryController extends \BaseController {
                 if (Request::ajax()) {
                     //Response json format
                     $response["message"] = $error;
-                    return json_encode($response);
+                    return  Response::json($response);
                 }
 
                 return Redirect::action("EntryController@update",array("id"=>$entry->id) )->with('error', $error)->withInput(Input::all());
@@ -161,8 +161,8 @@ class EntryController extends \BaseController {
                     $response["message"] = "Entry <em>'" . $entry->title . "'</em> updated succesfull!!";
                     $response["success"] = true;
                     $response["entry"] = $entry;
-                    $response["callback"] = "Entry.refresh";
-                    return json_encode($response);
+                    $response["callback"] = "";
+                    return  Response::json($response);
                 }
 
                 //Redirecto to home
@@ -171,7 +171,7 @@ class EntryController extends \BaseController {
                 if (Request::ajax()) {
                     //Response json format
                     $response["message"] = 'Error updating entry. Please try again.';
-                    return json_encode($response);
+                    return  Response::json($response);
                 }
                 //Error to try create User, redirecto to Registration form
                 return Redirect::action("EntryController@update",array("id"=>$entry->id) )->with('error', 'Error updating entry. Please try again.')->withInput(Input::all());

@@ -152,9 +152,6 @@ class UserController extends \BaseController {
         } else {
             $tweets = $user->get_tweets($perpage)->toArray();
         }
-        
-        
-
         $response["message"] = trans("app.loaded_tweets",array("count"=>count($tweets["data"] )));
         $response["success"] = true;
         $response["data"] = $tweets;

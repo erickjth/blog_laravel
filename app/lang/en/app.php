@@ -32,27 +32,22 @@ return array(
     "error_signin"=>"Username or password incorrect. Please try again",
     "user_logged"=>"You are already logged in!",
     "login_require"=>"You must be logged before to view this page.",
-    
     "no_owner_message"=>"You dont have permission for edit this entry.",
     "no_exist_entry"=>"Entry to try edit, dont exist.",
     "user_no_exist"=>"User to try access, no exist",
     "tweet_no_exist"=>"Tweet to try access, dont exist",
     "no_owner_tweet"=>"Action no allow for you. Only owner can toggle tweet.",
-    
-    
     "view_entry"=>"View entry",
     "quick_view_entry"=>"Quick View",
     "edit_entry"=>"Edit entry",
     "update_entry"=>"Update entry",
     "go_back"=> "Go back",
-    
     "blog_entries_list"=>"Blog entries list",
-    
     "user_info"=>"User information",
     "tweets"=>"Tweets :twitter_account",
     "refresh"=>"Refresh",
     "loaded_new_tweets"=>":count new tweets found!",
     "loaded_tweets"=>":count tweets loaded!",
-    "tweet_hide"=>"Tweet is hide correctly.",
+    "tweet_hide"=>"Tweet was hidden correctly.",
     "tweet_show"=>"Tweet is visible again"
 );

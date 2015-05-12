@@ -55,7 +55,7 @@
         </div>
         <!--Side bar -->
         <div class="col-md-4">
-            <div class="panel panel-primary">
+            <div class="panel panel-primary twitter_timeline_panel">
                 <div class="panel-heading">@lang('app.tweets', array('twitter_account'=>$user->twitter_account) ) <a href="javascript:void(0);" id="sync_tweets" class="pull-right"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> @lang('app.refresh')</a></div>
                 <div class="panel-body">
                     <div id="twitter_timeline">

@@ -15,6 +15,7 @@ APP.user = {
     /**
      * Register handler
      */
+    
     register_local_handler: function() {
         var me = this;
         $("#sync_tweets").click(function(e) {
@@ -27,6 +28,28 @@ APP.user = {
             e.preventDefault();
         });
         
+        //Get hash in url from pagination link for load ajax page.
+        $(document).on('click', '#twitter_timeline + .pager a', function(e) {
+            var page = $(this).attr('href').split('page=')[1];
+            me.get_tweets(page);
+            e.preventDefault();
+        });
+        
+    },
+    
+    append_paginator_tweets: function(data){
+        var timeline = $("#twitter_timeline");
+        var ele = $("<div></div>", {class: 'pager '});
+ 
+        if( data.current_page > 1 ){
+            ele.append('<li><a href="'+route.get_tweet+'?page='+(data.current_page-1)+'" rel="prev">«</a></li>');
+        }
+        if( data.to <= data.total && data.current_page != data.last_page){
+            ele.append('<li><a href="'+route.get_tweet+'?page='+(data.current_page+1)+'" rel="next">»</a></li>');
+        }
+        
+        timeline.next().remove();
+        timeline.parent().append(ele);
     },
     
     procces_tweet: function (list, insert ) {
@@ -40,7 +63,7 @@ APP.user = {
             content.append('<span class="user_name">' + o.tw_name + '</span>');
             content.append('<span class="screen_name"><a target="_blank"  href="https://twitter.com/' + o.tw_screen_name + '">@' + o.tw_screen_name + '</a></span>');
             if( auth_user.hasOwnProperty('id') && auth_user.id == me.user.id ){
-                content.append('<a class="hide_tweet pull-right" data-twid="'+o.id+'" target="_blank" href="javascript:void(0);"><span class="glyphicon '+( (o.is_hidden==1)?"glyphicon-eye-open":"glyphicon glyphicon-eye-close" )+'"></span></a>');
+                content.append('<a class="hide_tweet pull-right" data-twid="'+o.id+'" target="_blank" href="javascript:void(0);"><span class="glyphicon glyphicon-eye-open"></span></a>');
             }
             content.append('<p class="date">' + moment.unix(o.tw_created_at).format('MMMM Do YYYY, h:mm:ss a') + '</p>');
             content.append('<p class="text">' + o.tw_text + '</p>');
@@ -55,6 +78,7 @@ APP.user = {
         //Convert URL linkable
         $('#twitter_timeline').linkify();
     },
+    
     /*
      * Function for get entries content by page via ajax, with hash url
      * @param page
@@ -65,7 +89,9 @@ APP.user = {
         if (!page || page == "undefined") {
             page = 1;
         }
-        
+        //Clear list
+        $('#twitter_timeline').empty();
+        //Get tweets via ajax
         $.ajax({
             url: route.get_tweet,
             dataType: 'json',
@@ -74,14 +100,13 @@ APP.user = {
             if( response.success ){
                 if( response.data.total > 0 ){
                     me.procces_tweet(response.data.data,1);
+                    me.append_paginator_tweets(response.data);
                     APP.notify('',response.message,'info');
                 }else{
                     me.sync_tweets();
                 }
-                //ToDo notification Sticky
             }else{
                 APP.notify('',response.message,'danger');
-                //ToDo notification Sticky
             }
         });
     },
@@ -94,10 +119,12 @@ APP.user = {
             method: 'POST',
         }).done(function (response) {
             if( response.success ){
+                var type = "info";
                 if( response.total > 0 ){
                     me.procces_tweet(response.data,-1);
+                    type = "success"
                 }
-                APP.notify('',response.message,'info');
+                APP.notify('',response.message,type);
             }else{
                 APP.notify('',response.message,'danger');
             }
@@ -116,10 +143,8 @@ APP.user = {
             if( response.success ){
                 if( response.data.is_hidden==1 ){
                     ele.addClass("hidden_tweet");
-                    ele.children(".hide_tweet > .glyphicon").removeClass("glyphicon-eye-open").addClass(" glyphicon-eye-close");
                 }else{
                     ele.removeClass("hidden_tweet");
-                    ele.find(".hide_tweet  > .glyphicon").addClass("glyphicon-eye-open").removeClass(" glyphicon-eye-close");
                 }
                 APP.notify('',response.message,'info');
             }else{

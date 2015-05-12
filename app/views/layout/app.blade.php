@@ -9,12 +9,15 @@
 
         <title>Blog :: @yield('title')</title>
 
+        
         <!-- Bootstrapt minified CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap/css/bootstrap.min.css') }}">
+        <!-- bootstrap3_wysihtml5 minified CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/lib/bootstrap3_wysihtml5/bootstrap3-wysihtml5.min.css') }}">
         <!-- Fonts from Google Fonts-->
         <link href='http://fonts.googleapis.com/css?family=Oswald|Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
         <!-- Style for application -->
-        <link href="{{ asset('assets/css/blog.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
 
         @yield('style')
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -80,18 +83,18 @@
 
         @include('blog.modal')
 
-        <!-- Bootstrap core JavaScript
-        ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
+        <!-- Load jquery library from google -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script src="{{ asset('assets/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+        <!-- Load Editor HTML bootstrap3 wysihtml5 -->
+        <script src="{{ asset('assets/lib/bootstrap3_wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
         <!--MomentJs for Date javascript Libs-->
-        <script src="{{ asset('assets/js/moment-with-locales.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/moment-with-locales.min.js') }}"></script>
         <!--Linkify a jQuery plugin javascript Libs-->
-        <script src="{{ asset('assets/js/jquery.linkify.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/jquery.linkify.min.js') }}"></script>
         <!--bootstrap-notify plugin javascript Libs-->
-        <script src="{{ asset('assets/js/bootstrap-notify.min.js') }}"></script>
+        <script src="{{ asset('assets/lib/bootstrap-notify.min.js') }}"></script>
         
         <script>
             //Save logged user in javascript var
@@ -102,7 +105,7 @@
             @endif
         </script>
         
-        <script src="{{ asset('assets/js/blog.js') }}"></script>
+        <script src="{{ asset('assets/js/app.js') }}"></script>
         <!--Custom scripts section load-->
         @yield('script')
 

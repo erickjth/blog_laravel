@@ -29,11 +29,25 @@ a{
 
 h1,h2,h3,h4,h5,h6{
     color: @headings-color;
+    font-family:@headings-font-family;
     font-weight: @headings-font-weight;
     line-height: @headings-line-height;
     color:@headings-color;
     > a{
         color:@headings-color;
+    }
+}
+
+/* Loing */
+
+.login_form,.register_form{
+    .form-action{
+        text-align:center;
+        input[type="submiT"],a{
+            width: 120px;
+            display:block;
+            margin: 20px auto;
+        }
     }
 }
 
@@ -60,10 +74,20 @@ h1,h2,h3,h4,h5,h6{
     margin-top: 5px;
 }
 
+/* Twiteter timeline */
+
+.twitter_timeline_panel{
+    .panel-heading {
+        a{
+            color: #fff;
+        }
+    }
+}
+
 #twitter_timeline{
 
     .hidden_tweet{
-        backgroup: #EAEAEA;
+        background: #EAEAEA;
         color: #ADABAB;
         a {
             color: #747474;
