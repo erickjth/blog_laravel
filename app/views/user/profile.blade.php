@@ -12,7 +12,7 @@
         var route = {
             get_entries: '{{ action("UserController@profile",array("username"=>$user->username)) }}',
             get_tweet: '{{ action("UserController@getTwitterTimeline",array("username"=>$user->username)) }}',
-            sync_tweets: '{{ action("UserController@syncTwitterTimeLine",array("username"=>$user->username,"count"=>10)) }}',
+            sync_tweets: '{{ action("UserController@syncTwitterTimeLine",array("username"=>$user->username,"count"=>5)) }}',
             toggle_tweet: '{{ action("UserController@toggle_tweet",array("username"=>$user->username)) }}',
         };
     </script>

@@ -16,10 +16,18 @@ class UserTableSeeder extends Seeder {
     public function run() {
         DB::table('users')->delete();
         User::create(array(
-            'username' => 'user',
-            'email' => 'user@email.com',
-            'password' => Hash::make('user'),
+            'username' => 'user1',
+            'email' => 'user1@email.com',
+            'password' => Hash::make('user123'),
             'twitter_account' => '@user',
+            'time_created'=>\time()
+        ));
+        
+        User::create(array(
+            'username' => 'user2',
+            'email' => 'user2@email.com',
+            'password' => Hash::make('user123'),
+            'twitter_account' => '@erickjth',
             'time_created'=>\time()
         ));
     }

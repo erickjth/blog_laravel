@@ -40,7 +40,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     
     //Array of rules form by this model
     public static $rules_validator = array(
-        'username' => 'required|alpha|min:2',
+        'username' => 'required|alpha_num|min:2',
         'email' => 'required|email|unique:users',
         'twitter_account'=>'required|regex:/^@(\w){1,15}$/',
         'password' => 'required|alpha_num|between:6,12|confirmed',

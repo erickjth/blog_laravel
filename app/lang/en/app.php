@@ -16,6 +16,7 @@ return array(
     "create_entry"=>"Create entry",
     "create_new_entry"=>"Create new entry",
     "hello"=>"Hello",
+    "my_profile"=>"My profile",
     "logout"=>"Logout",
     "login"=>"Login",
     "register"=>"Register",
@@ -51,5 +52,7 @@ return array(
     "tweets"=>"Tweets :twitter_account",
     "refresh"=>"Refresh",
     "loaded_new_tweets"=>":count new tweets found!",
-    "loaded_tweets"=>":count tweets loaded!"
+    "loaded_tweets"=>":count tweets loaded!",
+    "tweet_hide"=>"Tweet is hide correctly.",
+    "tweet_show"=>"Tweet is visible again"
 );

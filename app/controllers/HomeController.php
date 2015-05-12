@@ -11,6 +11,10 @@ class HomeController extends BaseController {
         //Get all entries 
         $entries = Entry::get_with_author(3);
         
+        if( Input::get("page") > $entries->getLastPage() ){
+            return Response::make("Page no valid!!");
+        }
+        
         //Get all users
         $users = User::get_with_entries();
         

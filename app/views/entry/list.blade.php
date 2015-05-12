@@ -24,6 +24,7 @@
         </div>
     </div>
 @empty
+    
     <p>@lang('app.empty_list'). {{ link_to('entry/new', "Create new entry", array("class"=>"btn btn-primary ")) }}</p>
 @endforelse  
 <!--Pgination-->

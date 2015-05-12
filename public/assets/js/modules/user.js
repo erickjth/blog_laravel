@@ -74,8 +74,10 @@ APP.user = {
             if( response.success ){
                 if( response.data.total > 0 ){
                     me.procces_tweet(response.data.data,1);
+                    APP.notify('',response.message,'info');
+                }else{
+                    me.sync_tweets();
                 }
-                APP.notify('',response.message,'info');
                 //ToDo notification Sticky
             }else{
                 APP.notify('',response.message,'danger');

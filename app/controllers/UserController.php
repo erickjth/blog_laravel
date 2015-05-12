@@ -114,6 +114,10 @@ class UserController extends \BaseController {
         
         $entries = $user->entries()->paginate(3);
         
+        if( Input::get("page") > $entries->getLastPage() ){
+            return Response::make("Page no valid!!");
+        }
+        
         //Response view with ajax
         if (Request::ajax()) {
             return View::make('entry.list')->with("entries",$entries);
@@ -148,6 +152,8 @@ class UserController extends \BaseController {
         } else {
             $tweets = $user->get_tweets($perpage)->toArray();
         }
+        
+        
 
         $response["message"] = trans("app.loaded_tweets",array("count"=>count($tweets["data"] )));
         $response["success"] = true;
@@ -182,12 +188,15 @@ class UserController extends \BaseController {
         //toggle flag hidden
         if( $tweet->is_hidden ){
             $tweet->is_hidden = 0;
+            $response["message"] =  trans("app.tweet_show");
         }else{
             $tweet->is_hidden = 1;
+            $response["message"] =  trans("app.tweet_hide");
         }
         $tweet->save();
         
         //Set and return object
+        
         $response["success"] = true;
         $response["data"] = $tweet->toArray();
         return Response::json($response);
@@ -249,9 +258,11 @@ class UserController extends \BaseController {
                 $tweet_entry->time_created = \time();
                 $tweet_entry->save();
                 
-                $response["data"][] = $tweet_entry->toArray();
+                $response["data"][$tweet_entry->tw_id] = $tweet_entry->toArray();
             }
         }
+        
+        ksort($response["data"]);
         
         //Return JSON response with new new tweet, for display
         $response["message"] = trans("app.loaded_new_tweets",array("count"=>count($tweets )));
